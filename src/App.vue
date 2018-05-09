@@ -8,7 +8,10 @@
     <div class="l-left" :class="{'z-left-header':header, 'z-left-footer':footer}" v-if="left">
       <left-nav></left-nav>
     </div>
-    <router-view class="page"></router-view>
+    <div class="l-content">
+      <loading-page v-if="$store.getters.getLoading"></loading-page>
+      <router-view class="page" v-else></router-view>
+    </div>
     <div class="l-right" :class="{'z-right-header':header, 'z-right-footer':footer}" v-if="right">
       <right-nav></right-nav>
     </div>
@@ -16,7 +19,6 @@
       <l-footer></l-footer>
     </div>
     <!--<notice></notice>-->
-    <loading-page v-if="$store.getters.getLoading"></loading-page>
   </div>
 </template>
 
@@ -136,6 +138,11 @@
       &.z-right-footer {
         padding-bottom: $h-footer;
       }
+    }
+    > .l-content {
+      position: relative;
+      height: 100%;
+      width: 100%;
     }
     > .g-common-toast {
       padding: $w-grid-space;
