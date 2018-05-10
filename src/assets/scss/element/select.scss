@@ -10,7 +10,7 @@
       color: $c-f-gray;
       border: none;
       border-radius: 0;
-      border-bottom: 1px solid $c-border-d4;
+      border-bottom: 1px solid $c-bd-gray;
     }
     .el-input__suffix {
       right: -5px;
@@ -33,6 +33,6 @@
     text-align: center;
     font-size: $f-xs;
     color: #5d5954;
-    border-bottom: 1px solid $c-border-d4;
+    border-bottom: 1px solid $c-bd-gray;
   }
 }

@@ -9,7 +9,7 @@
       <left-nav></left-nav>
     </div>
     <div class="l-content">
-      <loading-page v-if="$store.getters.getLoading"></loading-page>
+      <loading v-if="$store.getters.getLoading"></loading>
       <router-view class="page" v-else></router-view>
     </div>
     <div class="l-right" :class="{'z-right-header':header, 'z-right-footer':footer}" v-if="right">
@@ -18,7 +18,9 @@
     <div class="l-footer" v-if="footer">
       <l-footer></l-footer>
     </div>
-    <!--<notice></notice>-->
+    <div class="l-notice" v-if="notice">
+      <notice></notice>
+    </div>
   </div>
 </template>
 
@@ -27,13 +29,13 @@
   import LFooter from './layouts/footer'
   import LeftNav from './layouts/left-nav'
   import RightNav from './layouts/right-nav'
+  import Loading from './layouts/loading'
   import IconSvg from './layouts/unit/icon'
-  import Notice from './layouts/unit/notice'
-  import LoadingPage from './layouts/loading-page'
+  import Notice from './layouts/notice'
 
   export default {
     name: 'app',
-    components: { LHeader, LFooter, LeftNav, RightNav, IconSvg, Notice, LoadingPage },
+    components: { LHeader, LFooter, LeftNav, RightNav, IconSvg, Notice, Loading },
     computed: {
       header() {
         let flag = false
@@ -60,6 +62,13 @@
         let flag = false
         if (this.$route && this.$route.meta && this.$route.meta.layout && this.$route.meta.layout.right) {
           flag = this.$route.meta.layout.right
+        }
+        return flag
+      },
+      notice() {
+        let flag = false
+        if (this.$store && this.$store.getters.getNotice.toast && this.$store.getters.getNotice.toast.content !== '') {
+          flag = true
         }
         return flag
       }
@@ -144,85 +153,13 @@
       height: 100%;
       width: 100%;
     }
-    > .g-common-toast {
-      padding: $w-grid-space;
-      max-width: 80%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba($c-bg-black, 0.8);
-      color: $c-f-white;
-      border-radius: 2px;
-    }
-  }
-
-  #left-nav {
-    width: $w-nav;
-    height: 100%;
-    position: absolute;
-    padding-top: $h-header + 5px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    top: 0;
-    left: 0;
-    z-index: 99;
-    background-color: $c-aid;
-    .el-menu {
-      border-right: 0;
-      background-color: $c-aid;
-    }
-    .el-submenu__title {
-      line-height: 40px;
-      height: 40px;
-      font-size: $f-xs;
-    }
-    .el-menu-item {
-      line-height: 40px;
-      height: 40px;
-      min-width: $w-nav;
-      font-size: $f-xs;
-    }
-  }
-
-  .right-content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 34px $w-grid-space $h-grid-space $w-grid-space+$w-nav;
-    > .bread {
+    > .l-notice {
       position: absolute;
       top: 0;
       left: 0;
+      height: $h-notice;
       width: 100%;
-      height: 34px;
-      padding-left: $w-grid-space+$w-nav;
-      padding-top: $h-grid-space/2;
-      .el-breadcrumb__item {
-        > .el-breadcrumb__inner {
-          font-size: $f-xs;
-          color: $c-f-gray;
-          font-weight: 400;
-          &:hover {
-            color: $c-main;
-          }
-        }
-        &:last-child {
-          > .el-breadcrumb__inner {
-            color: $c-f-dark;
-          }
-        }
-      }
-    }
-    > .main {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.20);
-      border-radius: 4px;
-      padding: $h-grid-space $w-grid-space;
-      background-color: $c-bg-white;
-      overflow-y: auto;
+      z-index: 9999;
     }
   }
 </style>

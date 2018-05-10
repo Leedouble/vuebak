@@ -1,5 +1,5 @@
 <template>
-  <div id="c-resetpassword-box">
+  <div class="c-resetpassword-box">
     <el-form ref="resetpasswordForm" label-width="0" @submit.native.prevent="submit" :model="obj" :rules="rules"
              class="u-form">
       <el-form-item label="" prop="password">
@@ -73,7 +73,7 @@
 <style rel="stylesheet/scss" type="text/css" lang="scss">
   @import "../../assets/scss/base/config";
 
-  #c-resetpassword-box {
+  .c-resetpassword-box {
     position: relative;
     width: 100%;
     height: 100%;

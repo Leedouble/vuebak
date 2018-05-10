@@ -1,24 +1,21 @@
 <template>
-  <div id="c-login-box">
+  <div class="c-login-box">
     <el-form class="m-form-box" ref="loginForm" label-width="0" @submit.native.prevent="login" :model="obj"
              :rules="rules">
-      <el-form-item label=""  prop="phone">
+      <el-form-item label="" prop="phone">
         <span @click="clearPhone">
-          <vicon name="close" class="u-icon-same" v-show="obj.phone !== '' " ></vicon>
+          <vicon name="close" class="u-icon-same" v-show="obj.phone !== '' "></vicon>
         </span>
 
         <el-input class="u-log-ipt" v-model="obj.phone" placeholder="请输入手机号" size="large">
-          <!--<i slot="suffix" class="el-icon-circle-close m-log-icon" @click="clearPhone"></i>-->
         </el-input>
       </el-form-item>
       <el-form-item label="" prop="passwd">
         <span @click="changeInputType">
-           <vicon name="eye"  class="u-icon-same"  v-show="obj.passwd !== '' && passwordType === 'text' "></vicon>
-        <vicon name="eyeclose"  class="u-icon-same" v-show="obj.passwd !== '' && passwordType === 'password' "></vicon>
+           <vicon name="eye" class="u-icon-same" v-show="obj.passwd !== '' && passwordType === 'text' "></vicon>
+        <vicon name="eyeclose" class="u-icon-same" v-show="obj.passwd !== '' && passwordType === 'password' "></vicon>
         </span>
-
         <el-input class="u-log-ipt" v-model="obj.passwd" placeholder="请输入密码" size="large" :type="passwordType">
-          <!--<i slot="suffix" class="el-icon-view m-log-icon" @click="changeInputType"></i>-->
         </el-input>
       </el-form-item>
       <el-button class="u-log-btn" :disabled="isLogin" :loading="isLogin" type="primary" native-type="submit">登录
@@ -101,7 +98,7 @@
 <style rel="stylesheet/scss" type="text/css" lang="scss">
   @import "../../assets/scss/base/config";
 
-  #c-login-box {
+  .c-login-box {
     .m-form-box {
       > div {
         display: block;
@@ -111,7 +108,7 @@
             height: $h-l;
             line-height: $h-l;
             padding: 0 20px;
-            border: 1px solid $c-border-d4;
+            border: 1px solid $c-bd-gray;
             border-radius: 2px;
             &:focus {
               border-color: $c-input-foucs;
@@ -135,7 +132,7 @@
           }
         }
         .svg-icon {
-          fill:  $c-f-ccc;
+          fill: $c-f-ccc;
         }
       }
       .u-log-fgt {

@@ -1,5 +1,5 @@
 <template>
-  <div id="c-phonecode-box">
+  <div class="c-phonecode-box">
     <el-form ref="phonecodeForm" label-width="0" @submit.native.prevent="submit" :model="obj" :rules="rules"
              class="u-form">
       <el-form-item label="" prop="phone">
@@ -133,7 +133,7 @@
 <style rel="stylesheet/scss" type="text/css" lang="scss">
   @import "../../assets/scss/base/config";
 
-  #c-phonecode-box {
+  .c-phonecode-box {
     position: relative;
     width: 100%;
     height: 100%;

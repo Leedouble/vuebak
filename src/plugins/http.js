@@ -25,7 +25,7 @@ function serialize(query, type = '?') {
 function processUrl(url, opt = {}) {
   let apiUrl = ''
   if (process.env.NODE_ENV === 'production') {
-    apiUrl = '//dev.api.nodebak.com'
+    apiUrl = '//api.nodebak.com'
   } else if (process.env.NODE_ENV === 'testing') {
     apiUrl = '//test.api.nodebak.com'
   } else {

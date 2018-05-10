@@ -2,21 +2,19 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import base from './base'
-import ErrorPage from '../layouts/error-page'
+import error from './error'
 
 if (process.env.NODE_ENV === 'development') {
   Vue.use(VueRouter)
 }
 
 let list = []
-list = list.concat(base)
-list = list.concat([
-  { path: '*', name: '404', component: ErrorPage, meta: { auth: false } }
-])
+list = list.concat(base, error)
+
 if (process.env.NODE_ENV !== 'production') {
   const DevIcon = r => require.ensure([], () => r(require('../pages/dev/icon')), 'icon')
   list = list.concat([
-    { path: '/dev/icon', component: DevIcon, meta: { layout: 'child', auth: false } }
+    { path: '/dev/icon', component: DevIcon, meta: { auth: false } }
   ])
 }
 

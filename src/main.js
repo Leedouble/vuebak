@@ -19,13 +19,13 @@ import Vicon from './components/_unit/vicon'
 import DateTime from './filters/datetime'
 import Price from './filters/price'
 
-Vue.use(VueX)
 Vue.use(VueHttp)
 Vue.use(VueTool)
 Vue.component('vicon', Vicon)
 
 // element-ui
 if (process.env.NODE_ENV === 'development') {
+  Vue.use(VueX)
   Vue.use(Element)
 }
 

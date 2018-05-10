@@ -8,19 +8,12 @@ $h-header: 52px;
 $h-footer: 110px;
 $w-left-nav: 152px;
 $w-right-nav: 152px;
+$h-notice: 70px;
 
 $w-grid-space: 20px;
 $h-grid-space: 20px;
 
-$w-grid-width: 72px;
-$w-nav: 152px;
-$w-main-max: ($w-grid-width+$w-grid-space)*12+$w-grid-space;
-
-$w-main-s-max: 768px;
-$w-grid-s-space: 12px;
-$w-main-p-max: 640px;
-$w-grid-p-space: 8px;
-
+// 规格定义
 $h-s: 24px;
 $h-m: 30px;
 $h-m2: 40px;
@@ -80,12 +73,7 @@ $c-rim-aid: lighten($c-aid, 15%);
 $c-rim-gray: #d8d8d8;
 $c-rim-black: #666;
 
-$c-select-bg-hover: #89BFFF;
-
 $c-link: #0AB9F5;
-$c-border-gray: #666;
-$c-bg-nav: #1b1b1b;
-$c-border-d4: #d4d4d4;
 
 // radius
 $border-radius-xs: 2px;
@@ -133,7 +121,7 @@ $bezier: cubic-bezier(.46, .01, .55, 1);
 .cancel-box {
   border-radius: 2px;
   background-color: #ededed;
-  border: solid 1px $c-border-d4;
+  border: solid 1px $c-bd-gray;
   color: #898989;
   &:hover {
     background-color: #ededed;

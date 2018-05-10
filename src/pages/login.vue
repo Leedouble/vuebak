@@ -38,7 +38,6 @@
         this.isLogin = false
         if (loginRes.errno === 0) {
           this.$store.dispatch('login', loginRes.data)
-          this.$store.dispatch('setSchool', '1')
           this.$router.replace('/')
         } else {
           this.$message({ message: loginRes.errmsg, type: 'error' })

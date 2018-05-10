@@ -1,5 +1,5 @@
 <template>
-  <div id="m-notice">
+  <div class="g-common-notice">
     <div class="u-toast" :class="toast.type">
       <div class="content" v-html="toast.content"></div>
       <a href="javascript:;" @click="$store.dispatch('toast',{})" class="close">
@@ -20,24 +20,20 @@
 </script>
 
 <style type="text/css" lang="scss">
-  @import "../../assets/scss/base/config";
+  @import "../assets/scss/base/config";
 
-  #m-notice {
+  .g-common-notice {
     position: relative;
-    top: 0;
-    left: 0;
+    height: 100%;
     width: 100%;
     .u-toast {
-      position: absolute;
-      top: 0 - $h-header;
-      left: 0;
-      z-index: 9999;
+      position: relative;
+      height: 100%;
+      width: 100%;
       text-align: center;
       font-size: 18px;
       color: #fff;
-      line-height: 60px;
-      height: 60px;
-      width: 100%;
+      line-height: 100%;
       transition: top 0.3s $bezier, background 0.3s $bezier;
       &.info {
         background: $c-info;

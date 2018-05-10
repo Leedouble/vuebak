@@ -3,7 +3,7 @@
     <div class="m-header">
       <router-link :to="`/`"><h2 class="u-logo">LOGO</h2></router-link>
       <el-menu class="m-menu" :default-active="$route.fullPath" :router="true" mode="horizontal"
-            :background-color="menuBgColor" :text-color="menuFontcolor" :active-text-color="menuActiveColor">
+               :background-color="menuBgColor" :text-color="menuFontcolor" :active-text-color="menuActiveColor">
         <el-menu-item v-for="(item,index) in menus" :index="item.url" :key="index">{{item.name}}</el-menu-item>
       </el-menu>
       <div v-if="userObj.id" class="u-user">
@@ -31,8 +31,7 @@
         menuFontcolor: '#333',
         menuActiveColor: '#2c7fe3',
         menus: [
-          { name: '学校管理', url: '/school', value: 'school' }
-//          { name: '流程管理', url: '/flow', value: 'flow' }
+          { name: '模块一', url: '', value: '' }
         ]
       }
     },
@@ -56,9 +55,6 @@
       },
       login() {
         this.$router.push('/login')
-      },
-      userdetail() {
-        this.$router.replace('/school/relation/userdetail?id=' + this.userObj.id)
       }
     }
   }
@@ -72,20 +68,21 @@
     width: 100%;
     > .m-header {
       position: relative;
-      padding: 0 150px 0 $w-nav + $w-grid-space;
+      padding: 0 150px 0 $w-left-nav + $w-grid-space;
       width: 100%;
       height: 100%;
       border-bottom: 1px solid $c-bd-gray;
       background: $c-f-white;
       .u-logo {
         position: absolute;
-        height: $h-header;
-        width: $w-nav;
         top: 0;
         left: 0;
+        height: $h-header;
+        width: $w-left-nav;
         color: $c-f-white;
         background: $c-main;
         text-align: center;
+        line-height: $h-header;
       }
       > .m-menu {
         position: relative;
