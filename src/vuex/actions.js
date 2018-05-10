@@ -21,6 +21,9 @@ export const setRouter = function ({ commit }, from) {
 export const setMenu = function ({ commit }, menuList) {
   commit('MENU', menuList)
 }
+export const setLeftNav = function ({ commit }, leftNavList) {
+  commit('LEFTNAV', leftNavList)
+}
 /* eslint-disable */
 export const toast = function ({ commit, state }, toast = {}) {
   if (toast.content instanceof Object) {

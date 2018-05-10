@@ -31,7 +31,7 @@
         menuFontcolor: '#333',
         menuActiveColor: '#2c7fe3',
         menus: [
-          { name: '模块一', url: '', value: '' }
+          { name: '档案管理', url: '/user', value: 'user' }
         ]
       }
     },

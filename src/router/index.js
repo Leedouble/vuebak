@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import base from './base'
 import error from './error'
+import base from './base'
+import user from './user'
 
 if (process.env.NODE_ENV === 'development') {
   Vue.use(VueRouter)
 }
 
 let list = []
-list = list.concat(base, error)
+list = list.concat(base, error, user)
 
 if (process.env.NODE_ENV !== 'production') {
   const DevIcon = r => require.ensure([], () => r(require('../pages/dev/icon')), 'icon')

@@ -125,7 +125,7 @@
       height: 100%;
       width: $w-left-nav;
       padding: 0;
-      z-index: 999;
+      z-index: 99;
       &.z-left-header {
         padding-top: $h-header;
       }
@@ -140,7 +140,7 @@
       height: 100%;
       width: $w-right-nav;
       padding: 0;
-      z-index: 999;
+      z-index: 99;
       &.z-right-header {
         padding-top: $h-header;
       }

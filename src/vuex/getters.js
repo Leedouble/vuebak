@@ -24,6 +24,10 @@ export function getMenu(state) {
   return state.menu
 }
 
+export function getLeftNav(state) {
+  return state.leftNav
+}
+
 export function getUa(state) {
   return state.ua
 }

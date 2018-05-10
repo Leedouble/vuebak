@@ -73,6 +73,7 @@ const state = {
     common: []
   },
   menu: [],
+  leftNav: [],
   schoolId: school
 }
 

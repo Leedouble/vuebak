@@ -13,7 +13,7 @@ const baseList = [
     path: '/login',
     name: 'login',
     component: Login,
-    meta: { auth: false, type: 'noLogin', layout: { header: true, footer: true, left: true, right: true } }
+    meta: { auth: false, type: 'noLogin', layout: {} }
   },
   {
     path: '/find-password',

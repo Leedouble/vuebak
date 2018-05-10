@@ -31,7 +31,7 @@
       async login(obj) {
         this.loginObj = {
           phone: obj.phone,
-          passwd: md5.hex(`ming${obj.passwd}`)
+          passwd: md5.hex(`best${obj.passwd}`)
         }
         this.isLogin = true
         const loginRes = await this.$httpPost('/api/admin/login/phone', this.loginObj, false)
