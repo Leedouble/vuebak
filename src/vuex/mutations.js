@@ -55,6 +55,10 @@ export function MENU(state, menuList) {
   state.menu = menuList
 }
 
+export function LEFTNAV(state, leftNavList) {
+  state.leftNav = leftNavList
+}
+
 export function SOCKET(state, Obj) {
   if (!(state.socket[Obj.type] && state.socket[Obj.type].push)) {
     state.socket[Obj.type] = []

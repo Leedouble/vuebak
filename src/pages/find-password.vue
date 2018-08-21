@@ -19,7 +19,7 @@
   import md5 from 'js-md5'
 
   export default {
-    components: {PhonecodeBox, ResetpasswordBox},
+    components: { PhonecodeBox, ResetpasswordBox },
     data() {
       return {
         title: '忘记密码',
@@ -48,7 +48,7 @@
         const verifyRes = await this.$httpPost('/api/admin/findpassword/verifycode', this.verifyObj, false)
         this.isVerify = false
         if (verifyRes.errno !== 0) {
-          this.$message({message: verifyRes.errmsg, type: 'error'})
+          this.$message({ message: verifyRes.errmsg, type: 'error' })
           return false
         }
         this.currentStep++
@@ -57,13 +57,13 @@
       async modifyPassword(obj) {
         this.modifyObj = {
           phone: this.verifyObj.phone,
-          password: md5.hex(`ming${obj.password}`)
+          password: md5.hex(`best${obj.password}`)
         }
         this.isReset = true
         const modifyRes = await this.$httpPost('/api/admin/findpassword/resetpassword', this.modifyObj, false)
         this.isReset = false
         if (modifyRes.errno !== 0) {
-          this.$message({message: modifyRes.errmsg, type: 'error'})
+          this.$message({ message: modifyRes.errmsg, type: 'error' })
           return false
         }
         this.$router.replace('/login')

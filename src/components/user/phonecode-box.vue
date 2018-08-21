@@ -61,7 +61,7 @@
         text: '发送验证码',
         allowSend: true,
         lock: false,
-        sUrl: '/api/admin/login/sendusercode'
+        sUrl: '/api/admin/findpassword/sendusercode'
       }
     },
     watch: {
