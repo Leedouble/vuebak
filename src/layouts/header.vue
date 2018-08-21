@@ -1,15 +1,27 @@
 <template>
   <div class="g-common-header">
-    <div class="m-header">
-      <router-link :to="`/`"><h2 class="u-logo">LOGO</h2></router-link>
-      <el-menu class="m-menu" :default-active="$route.fullPath" :router="true" mode="horizontal"
-               :background-color="menuBgColor" :text-color="menuFontcolor" :active-text-color="menuActiveColor">
-        <el-menu-item v-for="(item,index) in menus" :index="item.url" :key="index">{{item.name}}</el-menu-item>
+    <div class="m-header" :style="{ width: hdWidth }">
+      <div class="m-header-left" v-if="isIde">
+        <div class="m-header-back-wraper" @click="goBack">
+          <vicon name="icon_back" class="icon_back"></vicon>
+          <div class="m-header-back-name">返回</div>
+        </div>
+        <router-link :to="`/`">
+          <vicon name="logo" class="logo"></vicon>
+        </router-link>
+      </div>
+      <router-link :to="`/`" v-if="!isIde">
+        <vicon name="logo" class="u-logo"></vicon>
+      </router-link>
+      <el-menu v-if="!isIde" class="m-menu" :default-active="defaultActive" :router="true" mode="horizontal"
+               :text-color="menuFontcolor" :active-text-color="menuActiveColor">
+        <el-menu-item v-for="(item,index) in menus" v-if="item.isShow" :index="item.url" :key="index">{{item.name}}
+        </el-menu-item>
       </el-menu>
       <div v-if="userObj.id" class="u-user">
         <div class="u-msg">
-          <img :src="userObj.avatarUrl" alt="">
-          <p class="name">{{userObj.realName}}</p>
+          <!--<img :src="userObj.avatarUrl" alt="">-->
+          <p class="name">嗨，{{userObj.nickName ? userObj.nickName : userObj.account}}</p>
         </div>
         <div class="u-menu">
           <a class="link" href="javascript:" @click="logout">退出</a>
@@ -27,12 +39,12 @@
     components: {},
     data() {
       return {
-        menuBgColor: '#fff',
         menuFontcolor: '#333',
         menuActiveColor: '#2c7fe3',
-        menus: [
-          { name: '模块一', url: '', value: '' }
-        ]
+        defaultActive: '',
+        menus: [],
+        isIde: false,
+        hdWidth: '1002px'
       }
     },
     computed: {
@@ -40,14 +52,46 @@
         return this.$store.getters.getUser
       }
     },
+    mounted() {
+      this.isIde = this.$route.path.indexOf('ide') >= 0
+      if (this.isIde) {
+        this.hdWidth = '100%'
+      } else {
+        this.hdWidth = '1002px'
+      }
+    },
+    watch: {
+      $route(val) {
+        this.isIde = val.path.indexOf('ide') >= 0
+        if (this.isIde) {
+          this.hdWidth = '100%'
+        } else {
+          this.hdWidth = '1002px'
+        }
+      }
+    },
     created() {
       if (this.menus) {
         this.$store.dispatch('setMenu', this.menus)
+        for (let list of this.menus) {
+          for (let child of list.children) {
+            if (child.url === this.$route.path) {
+              this.defaultActive = list.url
+            }
+          }
+        }
+        if (this.userObj && this.userObj.role === 1) {
+          for (let list of this.menus) {
+            if (list.url === '/student-works') {
+              list.isShow = false
+            }
+          }
+        }
       }
     },
     methods: {
       async logout() {
-        const res = await this.$httpPost('/api/admin/logout/phone', {}, false)
+        const res = await this.$httpPost('/api/user/logout', {}, false)
         if (res.errno === 0) {
           this.$store.dispatch('logout')
           this.$router.replace('/login')
@@ -55,6 +99,9 @@
       },
       login() {
         this.$router.push('/login')
+      },
+      goBack() {
+        history.back()
       }
     }
   }
@@ -66,13 +113,42 @@
     position: relative;
     height: 100%;
     width: 100%;
+    min-width: $w-page-content;
+    border-bottom: 1px solid $c-bd-gray;
+    background: $c-f-white;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
     > .m-header {
       position: relative;
-      padding: 0 150px 0 $w-left-nav + $w-grid-space;
-      width: 100%;
+      width: $w-page-content;
       height: 100%;
-      border-bottom: 1px solid $c-bd-gray;
-      background: $c-f-white;
+      margin: 0 auto;
+      > .m-header-left {
+        height: 59px;
+        display: flex;
+        align-items: center;
+        > .m-header-back-wraper {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          > .m-header-back-name {
+            font-size: 14px;
+            color: #195BE6;
+            margin-left: 10px;
+          }
+          > .icon_back {
+            width: 20px;
+            height: 20px;
+            fill: #195BE6;
+            margin-left: 15px;
+          }
+        }
+        .logo {
+          width: 96px;
+          height: 24px;
+          margin-left: 40px;
+          fill: #195BE6;
+        }
+      }
       .u-logo {
         position: absolute;
         top: 0;
@@ -80,19 +156,22 @@
         height: $h-header;
         width: $w-left-nav;
         color: $c-f-white;
-        background: $c-main;
         text-align: center;
         line-height: $h-header;
+        fill: $c-main;
       }
       > .m-menu {
         position: relative;
-        width: 100%;
-        height: 100%;
+        margin: 0 0 0 $w-left-nav;
+        height: 90%;
         line-height: 100%;
         overflow-y: hidden;
         overflow-x: auto;
         white-space: nowrap;
+        text-align: center;
         > .el-menu-item {
+          padding: 0 8px;
+          margin: 0 24px;
           float: none;
           display: inline-block;
           position: relative;
@@ -195,7 +274,8 @@
             font-size: 12px;
             color: #5D5954;
             &:hover {
-              background-color: #EBEBEB;
+              background-color: #E3F1FF;
+              color: $c-main;
             }
           }
         }

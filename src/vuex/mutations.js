@@ -24,10 +24,10 @@ export function LOGIN(state, user) {
 export function LOGOUT(state) {
   state.user = {
     id: '',
-    real_name: '',
-    head_url: '',
-    phone: '',
-    nick_name: ''
+    orgId: '',
+    avatarUrl: '',
+    role: '',
+    nickName: ''
   }
   setCookie('user', '', -1)
 }

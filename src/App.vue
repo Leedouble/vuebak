@@ -1,21 +1,21 @@
 <template>
   <div id="app"
-       :class="{'z-app-top':header, 'z-app-bottom':footer,'z-app-left':left,'z-app-right':right}">
+       :class="{'z-app-top':header, 'z-app-bottom':footer, 'z-app-left':left, 'z-app-right':right}">
     <icon-svg id="icon-list"></icon-svg>
     <div class="l-header" v-if="header">
       <l-header></l-header>
     </div>
-    <div class="l-left" :class="{'z-left-header':header, 'z-left-footer':footer}" v-if="left">
+    <div class="l-left" v-if="left" :class="{'z-left-header':header, 'z-left-footer':footer}">
       <left-nav></left-nav>
     </div>
     <div class="l-content">
       <loading v-if="$store.getters.getLoading"></loading>
-      <router-view class="page" v-else></router-view>
+      <router-view ref="content" class="page" v-else></router-view>
     </div>
-    <div class="l-right" :class="{'z-right-header':header, 'z-right-footer':footer}" v-if="right">
+    <div class="l-right" v-if="right" :class="{'z-right-header':header, 'z-right-footer':footer}">
       <right-nav></right-nav>
     </div>
-    <div class="l-footer" v-if="footer">
+    <div class="l-footer" v-if="footer || infooter" :class="{'z-footer-absolute':footer}">
       <l-footer></l-footer>
     </div>
     <div class="l-notice" v-if="notice">
@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/babel">
   import LHeader from './layouts/header'
   import LFooter from './layouts/footer'
   import LeftNav from './layouts/left-nav'
@@ -48,6 +48,13 @@
         let flag = false
         if (this.$route && this.$route.meta && this.$route.meta.layout && this.$route.meta.layout.footer) {
           flag = this.$route.meta.layout.footer
+        }
+        return flag
+      },
+      infooter() {
+        let flag = false
+        if (this.$route && this.$route.meta && this.$route.meta.layout && this.$route.meta.layout.infooter) {
+          flag = this.$route.meta.layout.infooter
         }
         return flag
       },
@@ -77,7 +84,8 @@
       return {}
     },
     created() {
-    }
+    },
+    methods: {}
   }
 </script>
 <style rel="stylesheet/scss" type="text/css" lang="scss">
@@ -87,9 +95,6 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: $c-bg-gray;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.20);
-    border-radius: 4px;
     &.z-app-top {
       padding-top: $h-header;
     }
@@ -103,20 +108,22 @@
       padding-right: $w-right-nav;
     }
     > .l-header {
-      position: absolute;
-      top: 0;
-      left: 0;
       height: $h-header;
       width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
       z-index: 999;
     }
     > .l-footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
       height: $h-footer;
       width: 100%;
       z-index: 999;
+      &.z-footer-absolute {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+      }
     }
     > .l-left {
       position: absolute;
@@ -124,8 +131,6 @@
       left: 0;
       height: 100%;
       width: $w-left-nav;
-      padding: 0;
-      z-index: 999;
       &.z-left-header {
         padding-top: $h-header;
       }
@@ -139,8 +144,6 @@
       right: 0;
       height: 100%;
       width: $w-right-nav;
-      padding: 0;
-      z-index: 999;
       &.z-right-header {
         padding-top: $h-header;
       }
@@ -150,8 +153,8 @@
     }
     > .l-content {
       position: relative;
-      height: 100%;
       width: 100%;
+      height: 100%;
     }
     > .l-notice {
       position: absolute;

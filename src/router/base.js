@@ -7,19 +7,19 @@ const baseList = [
     path: '/',
     name: 'index',
     component: Index,
-    meta: { layout: { header: true } }
+    meta: { layout: { header: true, footer: true } }
   },
   {
     path: '/login',
     name: 'login',
     component: Login,
-    meta: { auth: false, type: 'noLogin', layout: { header: true, footer: true, left: true, right: true } }
+    meta: { auth: false, type: 'noLogin' }
   },
   {
     path: '/find-password',
     name: 'find-password',
     component: FindPassword,
-    meta: { auth: false, layout: {} }
+    meta: { auth: false, type: 'noLogin', layout: {} }
   }
 ]
 export default baseList

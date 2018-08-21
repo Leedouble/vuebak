@@ -12,9 +12,10 @@ if (process.env.NODE_ENV === 'development') {
 
 const userDf = {
   id: '',
-  realName: '',
+  nickName: '',
   avatarUrl: '',
-  phone: ''
+  account: '',
+  role: 0
 }
 
 function getCookie(name) {
@@ -67,7 +68,7 @@ const state = {
     }
   },
   loading: false,
-  router: { from: '' },
+  router: {from: ''},
   socket: {
     live: [],
     common: []

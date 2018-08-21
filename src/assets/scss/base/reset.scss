@@ -2,7 +2,7 @@
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 html {
   color: $c-f;
-  background: $c-bg-gray;
+  background: $c-bg-wathet;
   height: 100%;
   min-width: $w-body-min;
   min-height: $h-body-min;
@@ -15,9 +15,7 @@ body {
   height: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: $h-grid-space $w-grid-space;
   box-sizing: border-box;
-  overflow-x: auto;
 }
 
 /* 内外边距通常让各个浏览器样式的表现位置不同 */

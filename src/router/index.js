@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
     if (store) {
       store.dispatch('setLoading', true)
     }
-    router.app.$httpPost('/api/admin', {}, false).then((res) => {
+    router.app.$httpGet('/api/user', {}, false).then((res) => {
       if (res.errno === 0) { // 用户已登录
         if (store) {
           store.dispatch('setLoading', false)

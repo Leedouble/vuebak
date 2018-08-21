@@ -20,8 +20,10 @@ export default {
     const minutes = tempDate.getMinutes()
     const seconds = tempDate.getSeconds()
 
+    const nowDate = new Date()
+    const currentYearTime = nowDate.getFullYear()
     const tempObj = {
-      YYYY: year,
+      YYYY: year === currentYearTime ? year.toFixed().substring(2, 4) : year,
       W: weekArr[week],
       MM: month > 9 ? month : `0${month}`,
       DD: day > 9 ? day : `0${day}`,
@@ -31,9 +33,7 @@ export default {
     }
     let dateText = format
     if (dateText === 'auto') {
-      const nowDate = new Date()
       const toDayTime = new Date(`${nowDate.getFullYear()}/${nowDate.getMonth() + 1}/${nowDate.getDate()}`)
-      const currentYearTime = new Date(`${nowDate.getFullYear()}`)
       if (tempDate.getTime() > toDayTime.getTime()) {
         dateText = 'HH:mm'
       } else if (tempDate.getTime() > currentYearTime.getTime()) {

@@ -1,6 +1,9 @@
 <template>
   <div id="p-index">
-    <h1>{{ currentTime | datetime('YYYY-MM-DD HH/mm/ss') }}</h1>
+    <!--<h1>{{ currentTime | datetime('YYYY-MM-DD HH/mm/ss') }}</h1>-->
+    <template v-if="isSubmit">
+      <div class="u-loading" v-loading="isSubmit"></div>
+    </template>
   </div>
 </template>
 
@@ -9,20 +12,14 @@
     name: 'index',
     data() {
       return {
-        currentTime: ''
+        isSubmit: true
       }
     },
     created() {
-      this.fetchData()
-    },
-    methods: {
-      async fetchData() {
-        this.currentTime = '2018-05-16'
-      }
+      this.isSubmit = true
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style rel="stylesheet/scss" type="text/css" lang="scss">
 </style>

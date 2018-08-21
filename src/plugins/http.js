@@ -25,11 +25,11 @@ function serialize(query, type = '?') {
 function processUrl(url, opt = {}) {
   let apiUrl = ''
   if (process.env.NODE_ENV === 'production') {
-    apiUrl = '//api.nodebak.com'
+    apiUrl = '//api.coding.qq.com'
   } else if (process.env.NODE_ENV === 'testing') {
-    apiUrl = '//test.api.nodebak.com'
+    apiUrl = '//test.api.coding.qq.com'
   } else {
-    apiUrl = '//dev.api.nodebak.com'
+    apiUrl = '//dev.api.coding.qq.com'
   }
   if (url.startsWith('/api')) {
     url = url.replace('/api', apiUrl)

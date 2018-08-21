@@ -2,20 +2,20 @@
   <div class="c-login-box">
     <el-form class="m-form-box" ref="loginForm" label-width="0" @submit.native.prevent="login" :model="obj"
              :rules="rules">
-      <el-form-item label="" prop="phone">
-        <span @click="clearPhone">
-          <vicon name="close" class="u-icon-same" v-show="obj.phone !== '' "></vicon>
+      <el-form-item label="" prop="account">
+        <span @click="clearAccount">
+          <vicon name="close" class="u-icon-same" v-show="obj.account !== '' "></vicon>
         </span>
 
-        <el-input class="u-log-ipt" v-model="obj.phone" placeholder="请输入手机号" size="large">
+        <el-input class="u-log-ipt" v-model="obj.account" placeholder="请输入账号" size="large">
         </el-input>
       </el-form-item>
-      <el-form-item label="" prop="passwd">
+      <el-form-item label="" prop="password">
         <span @click="changeInputType">
-           <vicon name="eye" class="u-icon-same" v-show="obj.passwd !== '' && passwordType === 'text' "></vicon>
-        <vicon name="eyeclose" class="u-icon-same" v-show="obj.passwd !== '' && passwordType === 'password' "></vicon>
+           <vicon name="eye" class="u-icon-same" v-show="obj.password !== '' && passwordType === 'text' "></vicon>
+        <vicon name="eyeclose" class="u-icon-same" v-show="obj.password !== '' && passwordType === 'password' "></vicon>
         </span>
-        <el-input class="u-log-ipt" v-model="obj.passwd" placeholder="请输入密码" size="large" :type="passwordType">
+        <el-input class="u-log-ipt" v-model="obj.password" placeholder="请输入密码" size="large" :type="passwordType">
         </el-input>
       </el-form-item>
       <el-button class="u-log-btn" :disabled="isLogin" :loading="isLogin" type="primary" native-type="submit">登录
@@ -37,11 +37,9 @@
       }
     },
     data() {
-      const checkPhone = (rule, value, callback) => {
+      const checkAccount = (rule, value, callback) => {
         if (!value) {
-          return callback(new Error('请输入手机号'))
-        } else if (value.length !== 11 || !/^1[34578]\d{9}$/.test(value)) {
-          return callback(new Error('请输入正确的手机号'))
+          return callback(new Error('请输入账号'))
         }
         return callback()
       }
@@ -57,16 +55,16 @@
       }
       return {
         rules: {
-          phone: [
-            { required: true, validator: checkPhone, trigger: 'blur' }
+          account: [
+            { required: true, validator: checkAccount, trigger: 'blur' }
           ],
-          passwd: [
+          password: [
             { required: true, validator: checkPassword, trigger: 'blur' }
           ]
         },
         obj: {
-          phone: '',
-          passwd: ''
+          account: '',
+          password: ''
         },
         passwordType: 'password'
       }
@@ -82,8 +80,8 @@
         this.$emit('on-handle-event', this.obj)
         return true
       },
-      clearPhone() {
-        this.obj.phone = ''
+      clearAccount() {
+        this.obj.account = ''
       },
       changeInputType() {
         if (this.passwordType === 'password') {

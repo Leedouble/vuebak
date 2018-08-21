@@ -78,7 +78,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: $c-bg-gray;
+    background-color: $c-bg-wathet;
     > .g-box {
       position: absolute;
       top: 50%;
